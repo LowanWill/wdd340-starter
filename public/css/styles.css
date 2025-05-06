@@ -10,7 +10,7 @@
   font-family: "Lato";
   font-size: 2rem;
   color: #333;
-  text-align: left justify;
+  text-align: left;
   margin: 0;
   padding: 1rem;
 }
@@ -19,7 +19,7 @@
   font-family: "Crimson Text";
   font-size: 1.5rem;
   color: black;
-  text-align: right justify;
+  text-align: right;
   margin: 0;
   padding: 1rem;
 }
