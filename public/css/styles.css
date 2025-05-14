@@ -38,21 +38,82 @@ nav ul {
 nav ul li {
   flex: 1 1 100%;
 }
+
+.homepage {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
 #welcome {
   font-family: "Lato";
 }
 
+.hero {
+  position: relative;
+}
+.hero img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 .herolabel {
+  text-align: left;
+  position: absolute;
+  top: 10%;
+  left: 15%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0.8);
   font-family: "Lato";
+  color: lightseagreen;
+}
+.herolabel button {
+  background-color: lightseagreen;
+  color: black;
 }
 
 .card h3 {
   font-family: "Lato";
 }
-.card img {
-  background-color: aqua;
-  padding: 20px;
+.card-reviews,
+.card-upgrades {
+  display: flex;
+  flex-wrap: wrap;
+  min-height: 200px;
+  width: 200px;
+}
+.card-upgrades {
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, auto);
+  gap: 1rem;
+}
+.card-upgrades img {
+  width: 40%;
+  height: auto;
+  background-color: lightseagreen;
+  padding: 10px;
 }
 
-@media screen and (min-width: 640px) {
+@media screen and (min-width: 635px) {
+  .homepage {
+    display: grid;
+    grid-template-rows: auto auto;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    border: 40px solid transparent;
+    padding: 55px;
+    border-image: url(../images/site/checkerboard.jpg) 50 round;
+    box-shadow: inset 0 0 0 10px lightseagreen;
+  }
+
+  section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+  }
+
+  .card-reviews {
+    display: block;
+  }
 }
