@@ -29,7 +29,7 @@ Util.getNav = async function (req, res, next) {
 * Build the classification view HTML
 * ************************************ */
 Util.buildClassificationGrid = async function(data){
-  let grid
+  let grid //this vatiable holds the HTML and is called in the classification view
   if(data.length > 0){
     grid = '<ul id="inv-display">'
     data.forEach(vehicle => { 
@@ -56,6 +56,33 @@ Util.buildClassificationGrid = async function(data){
     grid += '<p class="notice">Sorry, no matching vehicles could be found.</p>'
   }
   return grid
+}
+/* **************************************
+* Build the vehicle detail view HTML    
+* ************************************ */
+Util.buildDetail = async function(vehicle){
+  if (!vehicle) {
+    return '<p class="notice">Sorry, no matching vehicle could be found.</p>'
+  }
+  const price = Number(vehicle.inv_price).toLocaleString('en-US', {
+    style: 'currency',
+    currency: 'USD'
+  });
+  const miles = Number(vehicle.inv_miles).toLocaleString('en-US');
+  return `
+    <div class="detail">  
+      <div class="detail-image">
+        <img src="${vehicle.inv_image}" alt="Image of ${vehicle.inv_make} ${vehicle.inv_model} >
+      </div>
+      <div class="detail-info">
+        <h2>${vehicle.inv_make} ${vehicle.inv_model}</h2>
+        <p><strong>Price:</strong> ${price}</p>
+        <p><strong>Miles:</strong> ${miles}</p>
+        <p><strong>Color:</strong> ${vehicle.inv_color}</p>
+        <p><strong>Description:</strong> ${vehicle.inv_description}</p> 
+      </div>
+    </div>
+  `;  
 }
 
 /* ****************************************
