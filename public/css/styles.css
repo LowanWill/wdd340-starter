@@ -94,6 +94,28 @@ nav ul li {
   padding: 10px;
 }
 
+/*Detail- Individual vehicle view */
+.detail {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  gap: 2rem;
+  padding: 2rem;
+}
+.detail-img {
+  width: 100%;
+  height: auto;
+  border-radius: 1rem;
+}
+.detail h2 {
+  font-family: "Lato";
+  color: lightseagreen;
+}
+.detail-info p {
+  font-family: "Crimson Text";
+  color: black;
+}
+
 @media screen and (min-width: 635px) {
   .homepage {
     display: grid;
@@ -115,5 +137,16 @@ nav ul li {
 
   .card-reviews {
     display: block;
+  }
+  .detail {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  .detail-img {
+    grid-column: 1;
+  }
+  .detail-info {
+    grid-column: 2;
   }
 }
