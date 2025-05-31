@@ -72,7 +72,8 @@ Util.buildDetail = async function(vehicle){
   return `
     <div class="detail">  
       <div class="detail-image">
-        <img src="${vehicle.inv_image}" alt="Image of ${vehicle.inv_make} ${vehicle.inv_model}" </div>
+        <img src="${vehicle.inv_image}" alt="Image of ${vehicle.inv_make} ${vehicle.inv_model}">
+      </div>
       <div class="detail-info">
         <h2>${vehicle.inv_make} ${vehicle.inv_model}</h2>
         <p><strong>Price:</strong> ${price}</p>
