@@ -39,4 +39,17 @@ invCont.buildInvDetail = async function (req, res, next) {
   })
 }
 
+/* ***************************
+ *  Trigger an error for testing
+ * ************************** */
+invCont.triggerError = (req, res, next) => {
+  try {
+    const error = new Error();
+    error.status = 500;
+    throw error;
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = invCont
