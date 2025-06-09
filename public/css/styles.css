@@ -116,6 +116,14 @@ nav ul li {
   color: black;
 }
 
+/*forms*****/
+.login-form {
+  padding: 1rem;
+  background-color: lightseagreen;
+  border-radius: 1rem;
+  max-width: 750px;
+}
+
 @media screen and (min-width: 635px) {
   .homepage {
     display: grid;

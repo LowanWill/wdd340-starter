@@ -41,6 +41,61 @@ invCont.buildInvDetail = async function (req, res, next) {
 }
 
 /* ***************************
+ * Add classification 
+ * ************************** */
+invCont.processClassification = async function (req, res, next) {
+  const { classification_name } = req.body
+  const regClassification = await invModel.addClassification(classification_name)
+  const nav = await utilities.getNav()
+  if (regClassification) {
+    req.flash(
+      "notice",
+      `Congratulations, you have added a classification.`
+    )
+    res.status(201).render("inventory/add-classification", {
+      title: "Vehicle Classification",
+      nav,
+      errors: null,
+    })
+  } else {
+    
+    req.flash("notice", "Sorry, add classification failed.")
+    res.status(501).render("inventory/add-classification", {
+      title: "Vehicle Classification",
+      nav,
+      errors: null,
+    })
+  }
+}
+
+/* ***************************
+ * Add inventory item
+ * ************************** */
+invCont.processInventory = async function (req, res, next) {
+  const { classification_id, inv_make, inv_model, inv_description, inv_image, inv_thumbnail, inv_price, inv_year, inv_miles, inv_color } = req.body
+  const regInventory = await invModel.addInventory(classification_id, inv_make, inv_model, inv_description, inv_image, inv_thumbnail, inv_price, inv_year, inv_miles, inv_color)
+  const nav = await utilities.getNav()
+  if (regInventory) {
+    req.flash(
+      "notice",
+      `Congratulations, you have added a new inventory item.`
+    )
+    res.status(201).render("inventory/add-inventory", {
+      title: "Vehicle Inventory",
+      nav,
+      errors: null,
+    })
+  } else {
+    req.flash("notice", "Sorry, add inventory failed.")
+    res.status(501).render("inventory/add-inventory", {
+      title: "Vehicle Inventory",
+      nav,
+      errors: null,
+    })
+  }
+}
+
+/* ***************************
  *  Trigger an error for testing
  * ************************** */
 invCont.triggerError = (req, res, next) => {

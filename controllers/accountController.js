@@ -1,3 +1,4 @@
+/*const bcrypt = require("bcryptjs")*/
 const utilities = require("../utilities/")
 const accountModel = require("../models/account-model")
 
@@ -63,6 +64,7 @@ async function registerAccount(req, res) {
     res.status(201).render("account/login", {
       title: "Login",
       nav,
+      errors: null,
     })
   } else {
     req.flash("notice", "Sorry, the registration failed.")
