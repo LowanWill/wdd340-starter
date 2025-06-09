@@ -3,6 +3,9 @@ const utilities = require("../utilities/")
 
 const invCont = {}
 
+
+
+
 /* ***************************
  *  Build inventory by classification view
  * ************************** */
@@ -37,6 +40,18 @@ invCont.buildInvDetail = async function (req, res, next) {
     nav,
     detail,
     errors: null,
+  })
+}
+
+/* ***************************
+ *  Build inventory management view 
+  * ************************** */
+ invCont.buildManagementView = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  res.render("inventory/management",{
+    title: "Vehicle Management",
+    nav,
+    errors: null
   })
 }
 
@@ -94,6 +109,8 @@ invCont.processInventory = async function (req, res, next) {
     })
   }
 }
+
+
 
 /* ***************************
  *  Trigger an error for testing

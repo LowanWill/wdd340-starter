@@ -14,7 +14,7 @@ router.get("/detail/:invId", utilities.handleErrors(invController.buildInvDetail
 //Route to build management view
 router.get("/", utilities.handleErrors(invController.buildManagementView));
 
-router.get("/classification", utilities.handleErrors(invController.builClassificationView));
+router.get("/classification", utilities.handleErrors(invController.buildClassificationView));
 
 router.get("/inventory", utilities.handleErrors(invController.buildInventoryView));
 
