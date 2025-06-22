@@ -14,22 +14,22 @@ router.get("/detail/:invId", utilities.handleErrors(invController.buildInvDetail
 //Route to build management view
 router.get("/", utilities.handleErrors(invController.buildManagementView));
 
-router.get("/classification", utilities.handleErrors(invController.buildClassificationView));
+router.get("/add-classification", utilities.handleErrors(invController.buildClassificationView));
 
-router.get("/inventory", utilities.handleErrors(invController.buildInventoryView));
+router.get("/add-inventory", utilities.handleErrors(invController.buildInventoryView));
 
 router.post(
-  "/classification",
+  "/add-classification",
   invValidate.classificationRules(),
   invValidate.checkClassData,
-  utilities.handleErrors(invController.processClassification)
+  utilities.handleErrors(invController.addClassification)
 )
 
 router.post(
-  "/inventory",
+  "/add-inventory",
   invValidate.inventoryRules(),
   invValidate.checkInvData,
-  utilities.handleErrors(invController.processInventory)
+  utilities.handleErrors(invController.addInventory)
 )
 
 //error handler through footer
