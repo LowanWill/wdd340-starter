@@ -32,6 +32,18 @@ router.post(
   utilities.handleErrors(invController.addInventory)
 )
 
+router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
+
+router.get("/edit/:invId", utilities.handleErrors(invController.buildEditInventoryView))
+
+router.post(
+  '/edit-inventory',
+  invValidate.inventoryRules(),
+  invValidate.checkInvUpdateData,
+  utilities.handleErrors(invController.updateInventory)
+)
+
+
 //error handler through footer
 router.get("/error-trigger", invController.triggerError);
 

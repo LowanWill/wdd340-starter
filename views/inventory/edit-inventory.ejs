@@ -16,10 +16,10 @@
                 <% } %>
 
                     <div class="addInventory">
-                        <form id="addInventoryForm" action="/inv/add-inventory" method="post">
+                        <form id="updateForm" action="/inv/edit-inventory" method="post">
                             <div>
                                 <label for="classificationList">Classification</label>
-                                <%- classificationList %>
+                                <%- list%>
                             </div>
 
                             <div>
@@ -79,5 +79,9 @@
                                 <input type="text" name="inv_color" id="inv_color" placeholder="Min of 3 characters"
                                     minlength="3" pattern="[A-Za-z ]+" required value="<%= locals.inv_color %>">
                             </div>
-                            <button type="submit">Add To Inventory</button>
+                            <input type="hidden" name="inv_id" <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
+                                <% } %>>
+
+                                    <button type="submit" disabled>Update Inventory</button>
                         </form>
+                        <script src="/js/inv-update.js"></script>
