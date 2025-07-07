@@ -1,4 +1,4 @@
-/*const bcrypt = require("bcryptjs")*/
+const bcrypt = require("bcryptjs")
 const utilities = require("../utilities/")
 const accountModel = require("../models/account-model")
 

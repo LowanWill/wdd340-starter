@@ -92,8 +92,8 @@ invCont.addClassification = async function (req, res, next) {
       "notice",
       `Congratulations, you have added a classification.`
     )
-    res.status(201).render("inventory/add-classification", {
-      title: "Vehicle Classification",
+    res.status(201).render("inventory/management", {
+      title: "Vehicle Management",
       nav,
       errors: null,
     })
@@ -121,8 +121,8 @@ invCont.addInventory = async function (req, res, next) {
       "notice",
       `Congratulations, you have added a new inventory item.`
     )
-    res.status(201).render("inventory/add-inventory", {
-      title: "Vehicle Inventory",
+    res.status(201).render("inventory/management", {
+      title: "Vehicle Management",
       nav,
       errors: null,
       list,
