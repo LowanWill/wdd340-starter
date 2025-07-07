@@ -43,6 +43,9 @@ router.post(
   utilities.handleErrors(invController.updateInventory)
 )
 
+router.get("/delete/:invId", utilities.handleErrors(invController.deleteVehicleConfirmation))
+
+router.post("/deleteVehicle", utilities.handleErrors(invController.deleteVehicle))
 
 //error handler through footer
 router.get("/error-trigger", invController.triggerError);

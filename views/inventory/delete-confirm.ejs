@@ -1,0 +1,50 @@
+<% if (title) { %>
+    <h1>
+        <%= title %>
+    </h1>
+    <% } else { res.redirect('/') } %>
+
+        <%- messages() %>
+            <% if (errors) { %>
+                <ul class="notice">
+                    <% errors.array().forEach(error=> { %>
+                        <li>
+                            <%= error.msg %>
+                        </li>
+                        <% }) %>
+                </ul>
+                <% } %>
+
+                    <p>Please confirm delete</p>
+
+                    <div class="addInventory">
+                        <form id="deleteForm" action="/inv/deleteVehicle" method="post">
+
+
+                            <div>
+                                <label for="inv_make">Make</label>
+                                <input type="text" name="inv_make" id="inv_make" placeholder="Min of 3 characters"
+                                    minlength="3" pattern="[a-zA-Z0-9 ]+" required
+                                    value="<%= data.inv_make %> readonly">
+                            </div>
+
+                            <div>
+                                <label for="inv_model">Model</label>
+                                <input type="text" name="inv_model" id="inv_model" placeholder="Min of 3 characters"
+                                    minlength="3" pattern="[a-zA-Z0-9 ]+" required
+                                    value="<%= data.inv_model %>readonly">
+                            </div>
+
+
+                            <div>
+                                <label for="inv_price">Price</label>
+                                <input type="number" name="inv_price" id="inv_price" placeholder="Price" required
+                                    min="0" step="1" value="<%= data.inv_price %>readonly">
+                            </div>
+
+
+                            <input type="hidden" name="inv_id" <% if(data.inv_id) { %> value="<%= data.inv_id %>"
+                                <% } %>>
+
+                                    <button type="submit">Delete Inventory</button>
+                        </form>
