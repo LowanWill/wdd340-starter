@@ -133,6 +133,8 @@ Util.checkJWTToken = (req, res, next) => {
     next()
    })
  } else {
+    res.locals.accountData = null
+    res.locals.loggedin = 0
   next()
  }
 }
