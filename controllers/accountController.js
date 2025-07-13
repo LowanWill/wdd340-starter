@@ -146,5 +146,70 @@ async function accountLogin(req, res) {
   }
 }
 
+/* ****************************************
+ *  Deliver account update view
+ * ************************************ */
+async function buildAccountUpdate(req, res, next) {
+  try {
+    let nav = await utilities.getNav()
+    const accountData = await accountModel.getAccountById(req.params.account_id)
+    res.render("account/update", {
+      title: "Update Account",
+      nav,
+      accountData,
+      errors: null,
+    })
+  } catch (error) {
+    next(error)
+  }
+}
 
-module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildManagement, logout }
+/* ****************************************
+ *  Process account info update
+ * ************************************ */
+async function updateAccountInfo (req, res, next)  {
+ 
+    const { account_id, account_firstname, account_lastname, account_email } = req.body
+    const updateResult = await accountModel.updateAccountInfo(
+      account_id,
+      account_firstname,
+      account_lastname,
+      account_email
+    ) 
+    if (updateResult) {
+      req.flash("notice", "Account information updated successfully.")
+      
+    } else {
+      req.flash("notice", "Sorry, the update failed. Please try again.")
+    }
+    const accountData = await accountModel.getAccountById(account_id)
+    let nav = await utilities.getNav()
+    res.render("account/management", {
+      title: "Account Management",
+      nav,
+      accountData,
+      errors: null
+    })
+  }
+
+
+/* ****************************************
+ *  Process password change
+ * ************************************ */
+async function updatePassword (req, res, next)  {
+  try {
+    const { account_id, new_password } = req.body
+    const hashed = await bcrypt.hashSync(new_password, 12)
+    await accountModel.updatePassword(account_id, hashed)
+    req.flash("notice", "Password updated successfully.")
+    res.redirect("/account/")
+  } catch (error) { 
+    next(error)
+  }
+}
+
+
+      
+
+
+module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildManagement, logout, buildAccountUpdate, updateAccountInfo, updatePassword }

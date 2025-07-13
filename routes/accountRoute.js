@@ -29,4 +29,22 @@ router.post(
 
 router.get("/logout", utilities.handleErrors(accountController.logout))
 
+// Update view
+router.get("/update/:account_id", utilities.handleErrors(accountController.buildAccountUpdate))
+// Process account update
+router.post(
+  "/update",
+  regValidate.accountUpdateRules(),
+  regValidate.checkUpdateData, utilities.handleErrors(accountController.updateAccountInfo)
+)
+
+// Process password change
+router.post(
+  "/update-password",
+  regValidate.passwordUpdateRules(),
+  regValidate.checkPasswordUpdateData,
+  utilities.handleErrors(accountController.updatePassword)
+)
+
+
 module.exports = router
