@@ -198,8 +198,13 @@ async function updateAccountInfo (req, res, next)  {
  * ************************************ */
 async function updatePassword (req, res, next)  {
   try {
-    const { account_id, new_password } = req.body
-    const hashed = await bcrypt.hashSync(new_password, 12)
+    console.log("BODY:", req.body)
+    const { account_id, account_password } = req.body
+    if (!account_password) {
+      req.flash("notice", "Password is required.")
+      return res.redirect("/account/update/" + account_id)
+    }
+    const hashed = await bcrypt.hash(account_password, 12)
     await accountModel.updatePassword(account_id, hashed)
     req.flash("notice", "Password updated successfully.")
     res.redirect("/account/")
@@ -207,7 +212,6 @@ async function updatePassword (req, res, next)  {
     next(error)
   }
 }
-
 
       
 
