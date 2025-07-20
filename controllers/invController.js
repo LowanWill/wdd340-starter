@@ -1,5 +1,6 @@
 const invModel = require("../models/inventory-model")
 const utilities = require("../utilities/")
+const reviewModel = require("../models/review-model")
 
 const invCont = {}
 
@@ -30,15 +31,31 @@ invCont.buildByClassificationId = async function (req, res, next) {
 invCont.buildInvDetail = async function (req, res, next) {
   const inv_id = req.params.invId
   const data = await invModel.getInvById(inv_id)
+  if (!data) {
+  req.flash("notice", "Vehicle not found.")
+  return res.redirect("/inv/")
+}
+
+  const reviewData = await reviewModel.getReviewsByInvId(inv_id)
+
+  let account_id = null
+  if(res.locals.loggedin)
+    account_id = res.locals.accountData.account_id
+
+  let userReview = null
+  if(account_id!== null) 
+    userReview = await reviewModel.getUserReview(account_id, inv_id)
+
   const nav = await utilities.getNav()
   const vehicle = Array.isArray(data) ? data[0] : data
   const detail = await utilities.buildDetail(vehicle)
-  
+  const reviews = await utilities.buildReviews(account_id, inv_id, reviewData, userReview)
   const title = `${vehicle.inv_make} ${vehicle.inv_model}`
   res.render("./inventory/itemDetail", {
     title: title,
     nav,
     detail,
+    reviews,
     errors: null,
   })
 }
@@ -284,7 +301,7 @@ invCont.deleteVehicleConfirmation = async function (req, res, next) {
   const data = await invModel.getInvById(inv_id)
   let nav = await utilities.getNav()
     
-  const title = `${vehicle.inv_make} ${vehicle.inv_model}`
+  const title = `${data.inv_make} ${data.inv_model}`
   res.render("./inventory/delete-confirm", {
     title: "Delete " + title,
     nav,

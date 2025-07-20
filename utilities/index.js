@@ -88,6 +88,43 @@ Util.buildDetail = async function(vehicle){
 }
 
 /* ****************************************
+ *  Build Item Review 
+ * ************************************ */
+Util.buildReviews = async function(account_id, inv_id, allReviews, userReview) {
+
+  let reviews = `<div id ="reviews">
+  <h2>Reviews</h2>`
+  
+  if(account_id != null)
+  if(!userReview && account_id) {
+  reviews += `<a href = "/reviews/reviewForm/${inv_id}" title="Submit a review for this vehicle">Submit a Review</a>`
+  } else{
+    reviews += `
+    <a href = "/reviews/editReview/${inv_id}" title="Edit your review for this vehicle">Edit Review</a>
+    <a href = "/reviews/deleteReview/${inv_id}" title="Delete your review for this vehicle">Delete Review</a>`
+
+  }
+
+  if (allReviews.length===0)
+    reviews += `<p>No reviews for this vehicle yet.</p>`
+  else {
+    allReviews.forEach(review=>{
+      reviews += `<div class="item-review">
+      <p>${review.review_text} --${review.account_firstname}</p>
+      </div>`
+    })
+  
+}
+  reviews += `</div>`
+  return reviews
+}
+
+
+
+
+
+
+/* ****************************************
  * Middleware For Handling Errors
  * Wrap other function in this for 
  * General Error Handling
@@ -150,5 +187,8 @@ Util.checkJWTToken = (req, res, next) => {
     return res.redirect("/account/login")
   }
  }
+
+ 
+ 
 
 module.exports = Util

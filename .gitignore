@@ -22,6 +22,11 @@ account_lastname: Client
 account_email: basic@340.edu
 account_password: I@mABas1cCl!3nt
 
+Customer
+Doe
+customer@340.edu
+I@mACust0m34
+
 account_firstname: Happy
 account_lastname: Employee
 account_email: happy@340.edu
